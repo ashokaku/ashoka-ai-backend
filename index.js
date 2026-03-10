@@ -30,12 +30,12 @@ async function generateQueryEmbedding(query) {
             parameters: { input_type: 'query' }
         })
     });
-    
+
     if (!res.ok) {
         const err = await res.json();
         throw new Error(`Embedding Failed: ${JSON.stringify(err)}`);
     }
-    
+
     const data = await res.json();
     return data.data[0].values;
 }
@@ -86,7 +86,7 @@ app.post('/api/chat', async (req, res) => {
                 { role: "system", content: systemPrompt },
                 { role: "user", content: query }
             ],
-            model: "llama3-8b-8192",
+            model: "llama-3.1-8b-instant",
             temperature: 0.6,
             max_tokens: 400
         });
